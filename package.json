@@ -4,11 +4,13 @@
   "description": "the volagal guild's bot",
   "main": "index.js",
   "scripts": {
+    "dev": "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vinanddrinks/Volagal-bot.git"
+    "url": "git+https://github.com/Vinanddrninks/Volagal-bot.git"
   },
   "keywords": [
     "discord",
@@ -19,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/Vinanddrinks/Volagal-bot/issues"
   },
-  "homepage": "https://github.com/Vinanddrinks/Volagal-bot#readme"
+  "homepage": "https://github.com/Vinanddrinks/Volagal-bot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.27.3",
+    "discord.js": "^13.6.0",
+    "mojang-promise-api": "^1.0.2",
+    "rcon": "^1.1.0",
+    "wokcommands": "^1.5.3"
+  }
 }
