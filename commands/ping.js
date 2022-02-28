@@ -1,14 +1,11 @@
 module.exports = {
     category: 'Testing',
     description: 'Replies with pong',
-    testOnly: true,
-    callback: ({ message, interaction }) => {
+    slash:true,
+    callback: ({ interaction }) => {
       const reply = 'Pong!'
-      if(message){
-          message.reply({
-              content:reply,
-          })
-        return
-      }
+      interaction.reply({
+          content:reply
+      })
     },
 }
