@@ -28,6 +28,7 @@
     "discord.js": "^13.6.0",
     "mojang-promise-api": "^1.0.2",
     "rcon": "^1.1.0",
+    "sqlite": "^4.0.23",
     "wokcommands": "^1.5.3"
   }
 }
