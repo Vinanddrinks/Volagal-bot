@@ -27,7 +27,7 @@
     "discord-api-types": "^0.27.3",
     "discord.js": "^13.6.0",
     "mojang-promise-api": "^1.0.2",
-    "rcon": "^1.1.0",
+    "simple-rcon": "^0.3.1",
     "sqlite": "^4.0.23",
     "wokcommands": "^1.5.3"
   }

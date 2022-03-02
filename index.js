@@ -1,10 +1,10 @@
-const DiscordJS = require('discord.js')
+const discord = require('discord.js')
 const WOKCommands = require('wokcommands')
 const path = require('path')
 
-const { Intents } = DiscordJS
+const { Intents } = discord
 const config = require("./config.json")
-const client = new DiscordJS.Client({
+const client = new discord.Client({
   intents: [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MESSAGES,

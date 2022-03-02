@@ -128,3 +128,4 @@ dist
 
 # Volabot credentials
 config.json
+server.json
