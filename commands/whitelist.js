@@ -13,8 +13,22 @@ module.exports = {
         const pseudo = args[0];
         api.nameToUuid(pseudo)
         .then(res =>{
+            const sqlite = require('sqlite');
+            let db = new sqlite.Database('../clubRezo.db', sqlite.OPEN_READWRITE, (err) =>{
+                if (err){
+                    console.log(`${config.BOT_PROPERTIES.CONSOLE_ERROR} (${err})`);
+                }
+                console.log('Connected to the database');
+            });
+            db.run(`INSERT INTO WhitelistQueue(pseudoDicord) VALUES(${user.tag})`);
+            console.log(`${config.BOT_PROPERTIES.CONSOLE_INFO} dicord tag added`);
+            db.run(`INSERT INTO WhitelistQueue(pseudoMinecraft) VALUES(${pseudo})`);
+            console.log(`${config.BOT_PROPERTIES.CONSOLE_INFO} minecraft tag added`);
+            db.run(`INSERT INTO WhitelistQueue(serveur) VALUES(${args[1]})`);
+            console.log(`${config.BOT_PROPERTIES.CONSOLE_INFO} serveur tag added`);
+            db.close();
             const reply = `le pseudo: "${pseudo}" à été mis en file d'attente tu recevras un mp lorsqu'il sera whitelisté`;
-            console.log(`${config.BOT_PROPERTIES.CONSOLE_INFO} on the request of ${user.tag} the pseudo: ${pseudo} has been added to whitelisting queue`),
+            console.log(`${config.BOT_PROPERTIES.CONSOLE_INFO} on the request of ${user.tag} the pseudo: ${pseudo} has been added to ${args[1]}'s whitelisting queue`),
             interaction.reply({
                 content: reply
             })
