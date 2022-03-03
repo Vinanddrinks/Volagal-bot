@@ -33,7 +33,7 @@ module.exports = {
                         console.log('RCON VANILLA > Disconnected!');
                       });
                       interaction.reply({
-                        content:'success !'
+                        content:'Success !'
                     })
                 }else if(args[1] == "Moddé"){
                     var mconsole = new Rcon({
@@ -54,12 +54,12 @@ module.exports = {
                       });
                       
                       interaction.reply({
-                          content:'success !'
+                          content:'Success !'
                       })
                 }else{
                     console.log(`${config.BOT_PROPERTIES.CONSOLE_INFO} User: ${user.tag} tried to dwhitelist but provided an invalid server name`)
                     interaction.reply({
-                        content:"Nom du serveur invalide"
+                        content:"Nom du serveur invalide !"
                     })
                 }
 
@@ -68,7 +68,7 @@ module.exports = {
                 console.log(`${config.BOT_PROPERTIES.CONSOLE_WARN} User : ${user.tag} tried to dwhitelist but the pseudo is unknown`)
                 console.log(`${config.BOT_PROPERTIES.CONSOLE_ERROR} ${err}`)
                 interaction.reply({
-                    content:"le pseudo n'est pas reconnu par l'API Mojang"
+                    content:"Pseudo incorrect !"
                 })
             })
 
