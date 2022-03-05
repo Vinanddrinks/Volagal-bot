@@ -2,6 +2,7 @@
   "name": "volagal-bot",
   "version": "1.0.0",
   "description": "the volagal guild's bot",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "dev": "node index.js",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/Vinanddrinks/Volagal-bot#readme",
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
+    "chalk": "<=2.4.1",
     "discord-api-types": "^0.27.3",
     "discord.js": "^13.6.0",
     "mojang-promise-api": "^1.0.2",

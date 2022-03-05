@@ -126,6 +126,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# jetbrains
+.idea
+
 # Volabot credentials
 config.json
 server.json
