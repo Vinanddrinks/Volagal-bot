@@ -49,7 +49,7 @@ class Logger {
             this.getUnitWithZero(date.getMonth() + 1) +
             "_" +
             this.getUnitWithZero(date.getDate()) +
-            "Volabot.log";
+            "_Volabot.log";
 
         fs.appendFile(
             "./logs/" + fileName,
