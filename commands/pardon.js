@@ -86,18 +86,18 @@ module.exports = {
                                     WHERE Minecraft_Username = ?`, [0, username], (err) => {
                                 if (err) console.log(err)
                             });
+                            // interaction.channel.send({
+                            //     content: `[**${username}**] Good Vanilla`,
+                            //     ephemeral: true
+                            // })
 
-                            interaction.channel.send({
-                                content: `[**${username}**] Good Vanilla`,
-                                ephemeral: true
-                            })
                         }).on('disconnected', () => {
                             console.log('RCON VANILLA > Disconnected!');
                         }).on('error', (e) => {
-                            interaction.channel.send({
-                                content: `[**${username}**] Error Vanilla`,
-                                ephemeral: true
-                            })
+                            // interaction.channel.send({
+                            //     content: `[**${username}**] Error Vanilla`,
+                            //     ephemeral: true
+                            // })
                             logger.error(e)
                         });
 
@@ -120,18 +120,18 @@ module.exports = {
                                     WHERE Minecraft_Username = ?`, [0, username], (err) => {
                                 if (err) console.log(err)
                             });
+                            // interaction.channel.send({
+                            //     content: `[**${username}**] Good Mods`,
+                            //     ephemeral: true
+                            // })
 
-                            interaction.channel.send({
-                                content: `[**${username}**] Good Mods`,
-                                ephemeral: true
-                            })
                         }).on('disconnected', () => {
                             console.log('RCON VANILLA > Disconnected!');
                         }).on('error', (e) => {
-                            interaction.channel.send({
-                                content: `[**${username}**] Error Mods`,
-                                ephemeral: true
-                            })
+                            // interaction.channel.send({
+                            //     content: `[**${username}**] Error Mods`,
+                            //     ephemeral: true
+                            // })
                             logger.error(e)
                         });
 
@@ -149,6 +149,12 @@ module.exports = {
                                 })
                             }
                         });
+
+                        client.users.cache.find(u => u.id === user.id).send({
+                            content: "Tu n'as plus accès aux serveurs du Club-Rézo, désolé.\n" +
+                                     "Si tu penses qu'il s'agir d'une erreur, contact un modo minecraft."
+                        })
+
                     })
 
                     db.close()
