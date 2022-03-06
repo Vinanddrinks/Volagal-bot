@@ -1,9 +1,11 @@
 const Rcon = require("simple-rcon");
 const servers = require("../servers.json");
 const config = require("../config.json");
+const Mojang = require("mojang-promise-api");
+const sqlite = require("sqlite3");
 module.exports = {
     category: 'Minecraft',
-    description: 'whitelist a username using rcon on the server directly',
+    description: 'ban a username using rcon on the server directly',
     slash: true,
     expectedArgs: '<Pseudo_Minecraft>',
     minArgs: 1,
@@ -33,7 +35,6 @@ module.exports = {
 
         if (admin) {
             let api = new Mojang();
-            console.log("-> ✅", username);
             api.nameToUuid(username)
                 .then(async res => {
                     // Yet another bad username handler
@@ -57,7 +58,7 @@ module.exports = {
                         })
                     })
 
-                    if (whitelisted === 1) throw "Already Whitelisted"
+                    if (whitelisted === 0) throw "Already Banned"
                     else if (whitelisted === -1) throw "User Not Found"
 
                     interaction.reply({
@@ -70,8 +71,8 @@ module.exports = {
                             host: servers.vanilla.IP,
                             port: servers.vanilla.PORT,
                             password: servers.vanilla.Password,
-                        }).exec('whitelist add ' + username, () => {
-                            logger.info(username + 'has been whitelisted vanilla on demand of ' + user.tag)
+                        }).exec('whitelist remove ' + username, () => {
+                            logger.info(username + 'has been banned vanilla on demand of ' + user.tag)
                             mconsoleVanilla.close();
                         }).connect();
 
@@ -82,7 +83,7 @@ module.exports = {
 
                             db.run(`UPDATE Minecraft_Queue
                                     SET Whitelisted = ?
-                                    WHERE Minecraft_Username = ?`, [1, username], (err) => {
+                                    WHERE Minecraft_Username = ?`, [0, username], (err) => {
                                 if (err) console.log(err)
                             });
 
@@ -104,8 +105,8 @@ module.exports = {
                             host: servers.mod.IP,
                             port: servers.mod.PORT,
                             password: servers.mod.Password,
-                        }).exec('whitelist add ' + username, () => {
-                            logger.info(username + 'has been whitelisted mods on demand of ' + user.tag)
+                        }).exec('whitelist remove ' + username, () => {
+                            logger.info(username + 'has been banned mods on demand of ' + user.tag)
                             mconsoleMods.close();
                         }).connect();
 
@@ -116,7 +117,7 @@ module.exports = {
 
                             db.run(`UPDATE Minecraft_Queue
                                     SET Whitelisted = ?
-                                    WHERE Minecraft_Username = ?`, [1, username], (err) => {
+                                    WHERE Minecraft_Username = ?`, [0, username], (err) => {
                                 if (err) console.log(err)
                             });
 
@@ -144,7 +145,7 @@ module.exports = {
                                     res.reactions.removeAll()
                                         .catch(error => console.error('Failed to clear reactions:', error));
 
-                                    await res.react('✅');
+                                    await res.react('❌');
                                 })
                             }
                         });
@@ -156,11 +157,11 @@ module.exports = {
 
                 })
                 .catch(err => {
-                    logger.error("/whitelist " + err + " - " + user.tag + " - mc username : " + username)
+                    logger.error("/ban " + err + " - " + user.tag + " - mc username : " + username)
                     let reply = 'Une erreur est survenue ! Contact un membre du staff';
                     if (err === 'Bad Server') reply = "Tu dois envoyer ce message dans ce serveur :  https://discord.gg/dnUDCtkrm2"
                     else if (err === 'Undefined username') reply = `Aouch, ce pseudo semble invalide merci de verifier la syntaxe de celui-ci -> **${username}**`
-                    else if (err === 'Already Whitelisted') reply = `Ce pseudo est déjà sur la liste blanche -> **${username}**`
+                    else if (err === 'Already Banned') reply = `Ce pseudo est déjà exclu de la liste blanche -> **${username}**`
                     else if (err === 'User Not Found') reply = `Ce pseudo n'est pas sur notre liste -> **${username}**`
                     interaction.reply({
                         content: reply,
@@ -170,9 +171,7 @@ module.exports = {
             interaction.reply({
                 content: "Tu n'es pas habilité à utiliser cette fonction, désolé :/"
             })
-            logger.error("/whitelist " + user.tag + " - Forbidden")
+            logger.error("/ban " + user.tag + " - Forbidden")
         }
-
-
     },
 }
