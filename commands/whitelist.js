@@ -108,6 +108,9 @@ module.exports = {
                         }).exec('whitelist add ' + username, () => {
                             logger.info(username + 'has been whitelisted mods on demand of ' + user.tag)
                             mconsoleMods.close();
+                        }).exec('pardon ' + username, () => {
+                            logger.info(username + 'has been pardon vanilla on demand of ' + user.tag)
+                            mconsoleVanilla.close();
                         }).connect();
 
                         mconsoleMods.on('authenticated', () => {

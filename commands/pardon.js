@@ -74,6 +74,9 @@ module.exports = {
                         }).exec('whitelist remove ' + username, () => {
                             logger.info(username + 'has been banned vanilla on demand of ' + user.tag)
                             mconsoleVanilla.close();
+                        }).exec('ban ' + username, () => {
+                            logger.info(username + 'has been banned mods on demand of ' + user.tag)
+                            mconsoleMods.close();
                         }).connect();
 
                         mconsoleVanilla.on('authenticated', () => {
@@ -106,6 +109,9 @@ module.exports = {
                             port: servers.mod.PORT,
                             password: servers.mod.Password,
                         }).exec('whitelist remove ' + username, () => {
+                            logger.info(username + 'has been banned mods on demand of ' + user.tag)
+                            mconsoleMods.close();
+                        }).exec('ban ' + username, () => {
                             logger.info(username + 'has been banned mods on demand of ' + user.tag)
                             mconsoleMods.close();
                         }).connect();
