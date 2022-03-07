@@ -156,10 +156,20 @@ module.exports = {
                             }
                         });
 
-                        client.users.cache.find(u => u.id === user.id).send({
-                            content: "Tu n'as plus accès aux serveurs du Club-Rézo, désolé.\n" +
-                                     "Si tu penses qu'il s'agir d'une erreur, contact un modo minecraft."
-                        })
+                        db.all(`SELECT Discord_ID
+                                FROM Minecraft_Queue
+                                WHERE Minecraft_Username = ?`, [username], (err, rows) => {
+                            if (err) console.log(err)
+
+                            if (rows[0]) {
+                                client.users.cache.find(u => u.id === rows[0]).send({
+                                    content: "Tu n'as plus accès aux serveurs du Club-Rézo, désolé.\n" +
+                                        "Si tu penses qu'il s'agir d'une erreur, contact un modo minecraft."
+                                })
+                            }
+                        });
+
+
 
                     })
 

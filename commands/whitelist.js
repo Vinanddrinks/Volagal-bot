@@ -152,11 +152,19 @@ module.exports = {
                             }
                         });
 
-                        client.users.cache.find(u => u.id === user.id).send({
-                            content: "Tu es bien accepté sur les serveurs minecraft du Club-Rezo !\n" +
-                                    "Serveur moddé 1.12.2 => **" + servers.mod.Host + "**\n" +
-                                    "Serveur Vanuilla 1.18.2 => **" + servers.vanilla.Host + "**"
-                        })
+                        db.all(`SELECT Discord_ID
+                                FROM Minecraft_Queue
+                                WHERE Minecraft_Username = ?`, [username], (err, rows) => {
+                            if (err) console.log(err)
+
+                            if (rows[0]) {
+                                client.users.cache.find(u => u.id === rows[0]).send({
+                                    content: "Tu es bien accepté sur les serveurs minecraft du Club-Rezo !\n" +
+                                        "Serveur moddé 1.12.2 => **" + servers.mod.Host + "**\n" +
+                                        "Serveur Vanuilla 1.18.2 => **" + servers.vanilla.Host + "**"
+                                })
+                            }
+                        });
 
                     })
 
