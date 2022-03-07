@@ -151,8 +151,8 @@ module.exports = {
 
                         client.users.cache.find(u => u.id === user.id).send({
                             content: "Tu es bien accepté sur les serveurs minecraft du Club-Rezo !\n" +
-                                    "Serveur moddé 1.12.2 => **" + servers.mod.host + "**\n" +
-                                    "Serveur Vanuilla 1.18.2 => **" + servers.vanilla.host + "**"
+                                    "Serveur moddé 1.12.2 => **" + servers.mod.Host + "**\n" +
+                                    "Serveur Vanuilla 1.18.2 => **" + servers.vanilla.Host + "**"
                         })
 
                     })
