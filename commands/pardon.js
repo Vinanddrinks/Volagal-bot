@@ -171,6 +171,7 @@ module.exports = {
                     else if (err === 'User Not Found') reply = `Ce pseudo n'est pas sur notre liste -> **${username}**`
                     interaction.reply({
                         content: reply,
+                        ephemeral: true
                     })
                 })
         } else {

@@ -60,7 +60,7 @@ module.exports = {
                     else if (whitelisted === -1) throw "User Not Found"
 
                     interaction.reply({
-                        content: `[**${username}**] Waiting...`,
+                        content: `[**${username}**] Whitelisted !`,
                         ephemeral: true
                     })
 
@@ -71,6 +71,9 @@ module.exports = {
                             password: servers.vanilla.Password,
                         }).exec('whitelist add ' + username, () => {
                             logger.info(username + 'has been whitelisted vanilla on demand of ' + user.tag)
+                            mconsoleVanilla.close();
+                        }).exec('pardon ' + username, () => {
+                            logger.info(username + 'has been pardon vanilla on demand of ' + user.tag)
                             mconsoleVanilla.close();
                         }).connect();
 
@@ -148,8 +151,8 @@ module.exports = {
 
                         client.users.cache.find(u => u.id === user.id).send({
                             content: "Tu es bien accepté sur les serveurs minecraft du Club-Rezo !\n" +
-                                    "Serveur moddé 1.12.2 => **AHAHAHA**\n" +
-                                    "Serveur Vanuilla 1.18.2 => **AAAA**"
+                                    "Serveur moddé 1.12.2 => **" + servers.mod.host + "**\n" +
+                                    "Serveur Vanuilla 1.18.2 => **" + servers.vanilla.host + "**"
                         })
 
                     })
