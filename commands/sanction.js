@@ -162,14 +162,12 @@ module.exports = {
                             if (err) console.log(err)
 
                             if (rows[0]) {
-                                client.users.cache.find(u => u.id === rows[0]).send({
+                                client.users.cache.find(u => u.id === rows[0].Discord_ID).send({
                                     content: "Tu n'as plus accès aux serveurs du Club-Rézo, désolé.\n" +
                                         "Si tu penses qu'il s'agir d'une erreur, contact un modo minecraft."
                                 })
                             }
                         });
-
-
 
                     })
 

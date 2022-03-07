@@ -158,7 +158,8 @@ module.exports = {
                             if (err) console.log(err)
 
                             if (rows[0]) {
-                                client.users.cache.find(u => u.id === rows[0]).send({
+                                console.log("-> rows", rows);
+                                client.users.cache.find(u => u.id === rows[0].Discord_ID).send({
                                     content: "Tu es bien accepté sur les serveurs minecraft du Club-Rezo !\n" +
                                         "Serveur moddé 1.12.2 => **" + servers.mod.Host + "**\n" +
                                         "Serveur Vanuilla 1.18.2 => **" + servers.vanilla.Host + "**"
