@@ -139,7 +139,7 @@ module.exports = {
 
                         db.all(`SELECT Message_ID
                                 FROM Minecraft_Queue
-                                WHERE Discord_ID = ?`, [user.id], (err, rows) => {
+                                WHERE Minecraft_Username = ?`, [username], (err, rows) => {
                             if (err) console.log(err)
 
                             if (rows[0]) {
